@@ -2,20 +2,31 @@ import './scss/app.scss';
 import Header from './components/Header';
 import Categories from './components/Catigories';
 import Sort from './components/Sort';
-import PizzaBlock from './components/PizzaBlock';
+import BorshchBlock from './components/BorshchBlock';
+import borshch from './assets/Borshch.json';
+
 function App() {
   return (
-    <div class="wrapper">
+    <div className="wrapper">
       <Header />
-      <div class="content">
-        <div class="container">
-          <div class="content__top">
+      <div className="content">
+        <div className="container">
+          <div className="content__top">
             <Categories />
             <Sort />
           </div>
-          <h2 class="content__title">Все пиццы</h2>
-          <div class="content__items">
-            <PizzaBlock title="Пицца крута" />
+          <h2 className="content__title">Всі борщики</h2>
+          <div className="content__items">
+            {borshch.map((obj) => (
+              <BorshchBlock
+                key={obj.id}
+                title={obj.title}
+                price={obj.price}
+                imageUrl={obj.imageUrl}
+                sizes={obj.sizes}
+                types={obj.types}
+              />
+            ))}
           </div>
         </div>
       </div>
