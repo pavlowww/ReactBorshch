@@ -3,15 +3,19 @@ import './scss/app.scss';
 import Header from './components/Header';
 import Categories from './components/Catigories';
 import Sort from './components/Sort';
-import BorshchBlock from './components/BorshchBlock';
+import BorshchBlock from './components/BorshchBlock/BorshchBlock';
+import BorshchSkeleton from './components/BorshchBlock/BorshchSkeleton';
+
 import axios from 'axios';
 
 function App() {
   const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     axios.get('https://630e9b1a109c16b9abfd3eb9.mockapi.io/items').then((res) => {
       setItems(res.data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -26,16 +30,18 @@ function App() {
           </div>
           <h2 className="content__title">Всі борщики</h2>
           <div className="content__items">
-            {items.map((obj) => (
-              <BorshchBlock
-                key={obj.id}
-                title={obj.title}
-                price={obj.price}
-                imageUrl={obj.imageUrl}
-                sizes={obj.sizes}
-                types={obj.types}
-              />
-            ))}
+            {isLoading
+              ? [...new Array(12)].map((_, index) => <BorshchSkeleton key={index} />)
+              : items.map((obj) => (
+                  <BorshchBlock
+                    key={obj.id}
+                    title={obj.title}
+                    price={obj.price}
+                    imageUrl={obj.imageUrl}
+                    sizes={obj.sizes}
+                    types={obj.types}
+                  />
+                ))}
           </div>
         </div>
       </div>
