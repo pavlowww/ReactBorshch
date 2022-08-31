@@ -9,7 +9,6 @@ function BorshchBlock(props) {
   const [activeType, setActiveType] = useState(props.types[0]);
   const [activeSize, setActiveSize] = useState(0);
   const typeNames = ['Хліб-тарілка', 'класична тарілка'];
-
   return (
     <div className="borshch-block">
       <img className="borshch-block__image" src={props.imageUrl} alt="Borshch" />
